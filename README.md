@@ -38,6 +38,17 @@ Build Execute shell  ----> sudo cp -v -r -f * /myweb1
  	                                              Fast-forward mode --ff
                                                 
  Post-build Actions - Build other projects - Projects to build	- Second job  - Trigger only if build is stable
+ 
+ Execute shell- 
+       status=$(curl  -o  /dev/null  -s  -w "%{http_code}"  192.168.99.102:8081/a.html)
+       echo $status
+       
+       if [[ $status == 200 ]]
+       then
+        exit 0
+       else
+        exit 1
+       fi 
  Git publisher - 	Push Only If Build Succeeds		right
  	                   Merge Results                right
       Apply and save               
